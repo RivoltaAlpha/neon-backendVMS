@@ -9,6 +9,7 @@ import {
   updateBookingController,
   searchBookingController,
   getUserBookingsController,
+  getUsersBookingsController
 } from "./booking-controller";
 
 export const bookingRouter = new Hono();
@@ -20,6 +21,7 @@ bookingRouter.delete("/delete-booking/:id", authenticateBoth, deleteBookingContr
 bookingRouter.put("update-booking/:id", authenticateBoth, updateBookingController);
 bookingRouter.get("/search-booking/:id", authenticateBoth, searchBookingController);
 bookingRouter.get("/user-bookings/:id", authenticateBoth, getUserBookingsController);
+bookingRouter.get("/all-user-bookings/:id", authenticateBoth, getUsersBookingsController);
 
 
 export default bookingRouter;

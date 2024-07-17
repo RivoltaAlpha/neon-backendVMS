@@ -34,6 +34,7 @@ export const vehicles = pgTable('vehicles', {
     vehicleSpec_id: integer('vehicleSpec_id').references(() => vehicleSpecifications.vehicleSpec_id, {onDelete: "cascade"}).notNull(),
     rental_rate: decimal("rental_rate", { precision: 10, scale: 2 }).notNull(),
     availability: boolean('availability').notNull(),
+    image: varchar('image').notNull(),
     created_at: timestamp('created_at').defaultNow().notNull(),
     updated_at: timestamp('updated_at').defaultNow().notNull(),
 });

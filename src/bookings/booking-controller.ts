@@ -6,7 +6,8 @@ import {
     updateBooking,
     searchBooking,
     bookingExists,  
-    getUserBookings  
+    getUserBookings, 
+    getUsersBookings
   } from "./booking-services";
 
   import {
@@ -32,3 +33,4 @@ import {
 
 //get user bookings
 export const getUserBookingsController = getSpecificsController(getUserBookings);
+export const getUsersBookingsController = getSpecificsController(getUsersBookings);

@@ -24,8 +24,6 @@ import { specificationRouter } from './vehicleSpec/vh-routes'
 
 const app = new Hono();
 
-import  assert from 'assert' 
-
 const customTimeoutException = () =>
   new HTTPException(408, {
     message: `Request timeout after waiting for more than 10 seconds`,
@@ -75,6 +73,6 @@ app.route("/", specificationRouter);
 
 serve({
   fetch: app.fetch,
-  port: Number(process.env.PORT) || 3000,
+  port: 8000
 });
-console.log(`Server is running on port ${process.env.PORT}`);
+console.log(`Server is running on port ${ 8000 }`);

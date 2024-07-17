@@ -1,4 +1,4 @@
-import { bookings, TIBooking, TSBooking,payments,TIPayment,TSPayment, bookingStatusEnum, paymentStatusEnum, vehicleSpecifications } from "../drizzle/schema";
+import { bookings, TIBooking, TSBooking,payments,TIPayment,TSPayment,vehicles,users,locations,vehicleSpecifications} from "../drizzle/schema";
 import { eq } from "drizzle-orm";
 import db from "../drizzle/db";
 
@@ -137,5 +137,57 @@ export async function createPayment(paymentData: TIPayment): Promise<TSPayment> 
 // get user bookings
 export async function getUserBookings(userId: number): Promise<TSBooking[]> {
   const userBookings = await db.select().from(bookings).where(eq(bookings.user_id, userId));
+
   return userBookings;
+}
+
+export async function getUsersBookings(user_id: number) {
+  return await db.query.users.findMany({
+    where: (fields, { eq }) => eq(fields.user_id, user_id),
+    columns: {
+      user_id: true,
+      username: true,
+    },
+    with: {
+      bookings: {
+        columns: {
+          booking_id: true,
+          booking_date: true,
+          booking_status: true,
+          return_date: true,
+          total_amount: true,
+        },
+        with: {
+          location: {
+            columns: {
+              location_id: true,
+              name: true,
+            },
+          },
+          vehicle: {
+            columns: {
+              vehicle_id: true,
+              availability: true,
+              rental_rate: true,
+            },
+            with: {
+              vehicleSpec: {
+                columns: {
+                  manufacturer: true,
+                  model: true,
+                  year: true,
+                  fuel_type: true,
+                  engine_capacity: true,
+                  transmission: true,
+                  seating_capacity: true,
+                  color: true,
+                  features: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  });
 }

@@ -3,14 +3,28 @@ POST  http://localhost:8000/auth/register
 Content-Type: application/json
 
 {
-  "first_name": "John",
-  "last_name": "Doe",
-  "username": "john_doe",
+  "first_name": "Andrew",
+  "last_name": "John",
+  "username": "Andrew_john",
   "password": "securepassword123",
-  "email": "john_doe@example.com",
-  "contact_phone": "1234567890",
-  "address": "123 Main St",
-  "role": "user"
+  "email": "aihugo28@example.com",
+  "contact_phone": "+1-789-000-3456",
+  "address": "227 Maple ",
+  "role": "admin"
+}
+
+
+
+
+
+
+###
+POST  http://localhost:8000/auth/login
+Content-Type: application/json
+
+{
+    "username": "Jay",
+    "password": "securepassword1234"
 }
 
 ###
@@ -18,6 +32,237 @@ POST  http://localhost:8000/auth/login
 Content-Type: application/json
 
 {
-    "username": "john_doe",
-    "password": "securepassword123"
+    "username": "Tiff",
+    "password": "password"
+}
+
+###
+GET  http://localhost:8000/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBbmRyZXdfam9obiIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMDcxMzgyNn0.6TI7YJWgc5higOJ2SG0oBwODOfo7-mmHFgqp9uA2-OE
+
+###
+POST  http://localhost:8000/user
+
+Content-Type: application/json
+{
+  "first_name": "AJ",
+  "last_name": "jackson",
+  "email": "john.doe1234@example.com",
+  "contact_phone": "+1234567890",
+  "address": "123 Main St, Anytown, USA",
+  "role": "user"
+}
+
+
+
+###
+GET  http://localhost:8000/user/8
+
+###
+PUT  http://localhost:8000/update-user/8
+Content-Type: application/json
+
+{
+  "first_name": "Andrew",
+  "last_name": "john",
+  "username": "Andrew_john",
+  "password": "securepassword123",
+  "email": "Andrew229999@example.com",
+  "contact_phone": "1234567890",
+  "address": "123 Main St",
+  "role": "admin"
+}
+
+###
+
+DELETE http://localhost:8000/delete-user/1
+
+###
+GET http://localhost:8000/specifications
+
+###
+POST http://localhost:8000/specification
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKYXkiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MjEyMjUxMDF9.3LMt-5yiX-Y3aeyn8H2Eum8oRDE3OTCxBLhIOlm-YZM
+
+
+###
+GET http://localhost:8000/specification/1
+
+###
+PUT http://localhost:8000/specification/1
+{
+  "manufacturer": "Toyota",
+  "model": "Camry",
+  "year": 2020,
+  "fuel_type": "Petrol",
+  "engine_capacity": 1800,
+  "transmission": "Automatic",
+  "seating_capacity": 5,
+  "color": "Red",
+  "features": "Air Conditioning, Bluetooth, Backup Camera, Power Steering"
+}
+
+###
+POST http://localhost:8000/specification
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKYXkiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MjEyMjUxMDF9.3LMt-5yiX-Y3aeyn8H2Eum8oRDE3OTCxBLhIOlm-YZM
+Content-Type: application/json
+
+{
+  "manufacturer": "Kia",
+  "model": "Sportage",
+  "year": 2021,
+  "fuel_type": "Petrol",
+  "engine_capacity": 1800,
+  "transmission": "Automatic",
+  "seating_capacity": 5,
+  "color": "Gray",
+  "features": "Air Conditioning, Bluetooth, Backup Camera"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+###
+POST  http://localhost:8000/vehicle
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKYXkiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MjEyMjUxMDF9.3LMt-5yiX-Y3aeyn8H2Eum8oRDE3OTCxBLhIOlm-YZM
+Content-Type: application/json
+
+{
+  "vehicleSpec_id": 10,
+  "rental_rate": 7500,
+  "availability": true
+}
+
+
+
+
+
+
+
+###
+GET  http://localhost:8000/vehicles
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBbmRyZXdfam9obiIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMDcxMzgyNn0.6TI7YJWgc5higOJ2SG0oBwODOfo7-mmHFgqp9uA2-OE
+
+
+### 
+GET  http://localhost:8000/vehicle/1
+
+PUT  http://localhost:8000/update-vehicle/1
+
+###
+DELETE  http://localhost:8000/delete-vehicle/1
+
+###  
+GET  http://localhost:8000/bookings
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBbmRyZXdfam9obiIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMDM5MDA1Nn0.mTBN9AOQGaYwYeAknTCVSOCkgVB7F2V1x0ug8vE7j6Y
+
+###
+POST http://localhost:8000/location
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKYXkiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MjEyMjUxMDF9.3LMt-5yiX-Y3aeyn8H2Eum8oRDE3OTCxBLhIOlm-YZM
+Content-Type: application/json
+
+{
+  "name": "Spruce Street",
+  "address": "456 Spruce Street",
+  "contact_phone": "+1-567-8901"
+}
+
+
+
+
+
+
+
+
+
+
+###
+GET http://localhost:8000/location/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBbmRyZXdfam9obiIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMDcxMzgyNn0.6TI7YJWgc5higOJ2SG0oBwODOfo7-mmHFgqp9uA2-OE
+
+###
+GET http://localhost:8000/locations
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBbmRyZXdfam9obiIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMDcxMzgyNn0.6TI7YJWgc5higOJ2SG0oBwODOfo7-mmHFgqp9uA2-OE
+
+
+PUT http://localhost:8000/update-location/3
+Content-Type: application/json
+
+{
+  "location_id": 6,
+  "name": "Achivers ",
+  "address": "Two Rivers",
+  "contact_phone": "+1-566-4128"
+}
+
+DELETE http://localhost:8000/delete-location/3
+
+
+### user bookings
+GET  http://localhost:8000/user-bookings/7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUaWZmIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MjEwNTUyNTd9.YZl2p3__64R4RZj0KcttXEhfsXfmBbrX2mhClfnFf1A
+
+### 
+PUT   http://localhost:8000/update-booking/20
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUaWZmIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MjEwNTUyNTd9.YZl2p3__64R4RZj0KcttXEhfsXfmBbrX2mhClfnFf1A
+Content-Type: application/json
+
+  {
+    "booking_id": 20,
+    "user_id": 7,
+    "vehicle_id": 3,
+    "location_id": 6,
+    "booking_date": "2024-06-15",
+    "return_date": "2024-07-17",
+    "total_amount": 10000.00,
+    "booking_status": "Pending"
+  }
+
+###
+GET http://localhost:8000/bookings
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBbmRyZXdfam9obiIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMDcxMzgyNn0.6TI7YJWgc5higOJ2SG0oBwODOfo7-mmHFgqp9uA2-OE
+
+###
+GET http://localhost:8000/tickets
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUaWZmIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MjA3MTU4MDl9.8fYGwh6phmZnlz8rRa5UvgDP2pdKmjLoGlKpIofhQ7k
+
+###
+POST http://localhost:8000/ticket
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUaWZmIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MjA3MTU4MDl9.8fYGwh6phmZnlz8rRa5UvgDP2pdKmjLoGlKpIofhQ7k
+Content-Type: application/json
+
+{
+  "user_id":6,
+  "subject": "Damages",
+  "description":" Damaged Vehicle",
+  "ticket_status": "Open"
+}
+
+###
+GET http://localhost:8000/payments
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUaWZmIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MjA3MTU4MDl9.8fYGwh6phmZnlz8rRa5UvgDP2pdKmjLoGlKpIofhQ7k
+
+
+###
+POST http://localhost:8000/payment
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUaWZmIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MjA3MTU4MDl9.8fYGwh6phmZnlz8rRa5UvgDP2pdKmjLoGlKpIofhQ7k
+Content-Type: application/json
+
+{
+  "user_id":7,
+  "booking_id":20,
+  "amount": 5000,
+  "payment_status": "Pending",
+  "payment_date":"2024-07-12T06:48:00.000Z",
+  "payment_method":"card",
+  "transaction_id": 1
 }
