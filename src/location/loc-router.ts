@@ -12,7 +12,7 @@ export const locationRouter = new Hono();
 import { authenticateAdmin, authenticateBoth } from "../middleware/auth";
 
 
-locationRouter.get("/locations",authenticateAdmin, getAllLocationsController);
+locationRouter.get("/locations",authenticateBoth, getAllLocationsController);
 locationRouter.get("/location/:id",authenticateAdmin, getLocationController);
 locationRouter.post("/location", authenticateAdmin,createLocationController);
 locationRouter.delete("/delete-location/:id",authenticateAdmin, deleteLocationController);

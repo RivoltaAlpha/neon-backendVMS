@@ -1,4 +1,4 @@
-import { payments, TIPayment, TSPayment } from "../drizzle/schema";
+import { bookings, payments, TIPayment, TSPayment } from "../drizzle/schema";
 import { eq } from "drizzle-orm";
 import db from "../drizzle/db";
 
@@ -34,8 +34,15 @@ export const updatePayment = async (id: number, data: TIPayment): Promise<TIPaym
 
 // update payment status 
 export const updatePaymentBySessionId = async (session_id: string)=> {
-   await db.update(payments).set({ payment_status: "Success"}).where(eq(payments.transaction_id, session_id));
+  await db.update(payments).set({ payment_status: "Success"}).where(eq(payments.transaction_id, session_id));
+  // await db.update(bookings).set({ booking_status: "Confirmed"}).where(eq(bookings.booking_id, booking_id));
   return "Payment status updated successfully";
+}
+
+// update bookingStatus based on payment status
+export const updateBookingStatus = async (booking_id: number, booking_status: 'Confirmed') => {
+  await db.update(bookings).set({ booking_status: 'Confirmed' }).where(eq(bookings.booking_id, booking_id));
+  return "Booking status updated successfully";
 }
 
 // Delete a payment by ID
@@ -49,5 +56,10 @@ export const searchPayment = async (id: number): Promise<TSPayment | undefined> 
   return await db.query.payments.findFirst({ where: eq(payments.payment_id, id) });
 };
 
+// payment by user id
+export const getPaymentsByUserId = async (user_id: number): Promise<TSPayment[]> => {
+  const payment = await db.query.payments.findMany({ where: eq(payments.user_id, user_id) });
+  return payment;
+};
 
 

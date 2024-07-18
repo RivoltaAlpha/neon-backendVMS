@@ -182,6 +182,7 @@ export async function getUsersBookings(user_id: number) {
                   seating_capacity: true,
                   color: true,
                   features: true,
+                  image_url: true,
                 },
               },
             },

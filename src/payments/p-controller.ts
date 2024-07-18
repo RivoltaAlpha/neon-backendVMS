@@ -7,6 +7,8 @@ import {
     searchPayment,
     paymentExists,
     updatePaymentBySessionId,
+    updateBookingStatus,
+    getPaymentsByUserId,
   } from "./payment-services";
   
   import {
@@ -67,7 +69,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {  apiVersion: '2024-06
             mode: 'payment',
             success_url: `${FRONTEND_URL}/user-bookings/${booking.user_id}`,
             cancel_url: `${FRONTEND_URL}/explore`,
+            metadata: {
+                booking_id: booking.booking_id.toString(),
+            },
+          
         };
+        console.log(sessionParams)
         const session: Stripe.Checkout.Session = await stripe.checkout.sessions.create(sessionParams);
         // Save payment details to the database
         const paymentDetails = {
@@ -109,11 +116,12 @@ export const handleStripeWebhook = async (c: Context) => {
   switch (event.type) {
       case 'checkout.session.completed':
           const session = event.data.object as Stripe.Checkout.Session;
-          // Update payment status in the database
           try {
               const session_id = session.id;
-              const updateStatus = await updatePaymentBySessionId(session_id);
-              return c.json({ payment: updateStatus }, 200);
+              const updatePaymentStatus = await updatePaymentBySessionId(session_id);
+              // const booking_id = session.booking_id;
+              // const booking_status = await updateBookingStatus( booking_id, 'Confirmed');
+              return c.json({ payment: updatePaymentStatus }, 200);
           } catch (err: any) {
               return c.text(`Database Error: ${err.message}`, 500);
           }
@@ -121,6 +129,21 @@ export const handleStripeWebhook = async (c: Context) => {
       // Handle other event types as needed
       default:
           return c.text(`Unhandled event type ${event.type}`, 400);
+  }
+};
+
+
+export const fetchUserPayments = async (c: Context) => {
+  try {
+    const user_id = parseInt(c.req.param('user_id'), 10);
+    if (isNaN(user_id)) {
+      return c.text('Invalid user ID', 400);
+    }
+
+    const payments = await getPaymentsByUserId(user_id);
+    return c.json({ payments }, 200);
+  } catch (error) {
+    return c.text('Failed to fetch payments', 500);
   }
 };
 
