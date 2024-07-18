@@ -25,7 +25,7 @@ import handleStripeWebhook from './payments/p-controller';
 
 const app = new Hono();
 
-app.post("/stripe", handleStripeWebhook)
+app.post("/webhook", handleStripeWebhook)
 
 
 const customTimeoutException = () =>
