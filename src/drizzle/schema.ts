@@ -16,6 +16,7 @@ export const users = pgTable('users', {
     contact_phone: varchar('contact_phone', { length: 100 }).notNull(),
     address: varchar('address').notNull(),
     role: roleEnum("role").default("user").notNull(),
+    image_url: varchar('image_url', { length: 100 }),
     created_at: timestamp('created_at').defaultNow().notNull(),
     updated_at: timestamp('updated_at').defaultNow().notNull(),
 });
@@ -34,7 +35,6 @@ export const vehicles = pgTable('vehicles', {
     vehicleSpec_id: integer('vehicleSpec_id').references(() => vehicleSpecifications.vehicleSpec_id, {onDelete: "cascade"}).notNull(),
     rental_rate: decimal("rental_rate", { precision: 10, scale: 2 }).notNull(),
     availability: boolean('availability').notNull(),
-    image: varchar('image').notNull(),
     created_at: timestamp('created_at').defaultNow().notNull(),
     updated_at: timestamp('updated_at').defaultNow().notNull(),
 });
@@ -61,6 +61,7 @@ export const vehicleSpecifications = pgTable('vehicle_specifications', {
     seating_capacity: integer('seating_capacity').notNull(),
     color: text('color').notNull(),
     features: text('features').array().notNull(),
+    image_url: varchar('image_url' , { length: 100 }),
 });
 // relationship
 
@@ -107,6 +108,7 @@ export const paymentStatusEnum = pgEnum("payment_status", ["Pending", "Success",
 export const payments = pgTable('payments', {
     payment_id: serial('payment_id').primaryKey(),
     booking_id: integer('booking_id').references(() => bookings.booking_id, {onDelete: "cascade"}).notNull(),
+    user_id: integer('user_id').references(() => users.user_id, {onDelete: "cascade"}).notNull(),
     amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
     payment_status: paymentStatusEnum('payment_status').default('Pending').notNull(),
     payment_date: timestamp('payment_date').notNull(),

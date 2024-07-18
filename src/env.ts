@@ -11,3 +11,6 @@ const envSchema = z.object({
 const env = envSchema.parse(process.env);
 
 export { env };
+
+
+export const FRONTEND_URL = 'http://localhost:5173'

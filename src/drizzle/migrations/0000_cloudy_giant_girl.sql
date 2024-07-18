@@ -86,6 +86,7 @@ CREATE TABLE IF NOT EXISTS "locations" (
 CREATE TABLE IF NOT EXISTS "payments" (
 	"payment_id" serial PRIMARY KEY NOT NULL,
 	"booking_id" integer NOT NULL,
+	"user_id" integer NOT NULL,
 	"amount" numeric(10, 2) NOT NULL,
 	"payment_status" "payment_status" DEFAULT 'Pending' NOT NULL,
 	"payment_date" timestamp NOT NULL,
@@ -114,6 +115,7 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"contact_phone" varchar(100) NOT NULL,
 	"address" varchar NOT NULL,
 	"role" "role" DEFAULT 'user' NOT NULL,
+	"image_url" varchar(100),
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "users_username_unique" UNIQUE("username"),
@@ -130,7 +132,8 @@ CREATE TABLE IF NOT EXISTS "vehicle_specifications" (
 	"transmission" text NOT NULL,
 	"seating_capacity" integer NOT NULL,
 	"color" text NOT NULL,
-	"features" text[] NOT NULL
+	"features" text[] NOT NULL,
+	"image_url" varchar(100)
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "vehicles" (
@@ -186,6 +189,12 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "payments" ADD CONSTRAINT "payments_booking_id_bookings_booking_id_fk" FOREIGN KEY ("booking_id") REFERENCES "public"."bookings"("booking_id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "payments" ADD CONSTRAINT "payments_user_id_users_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("user_id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

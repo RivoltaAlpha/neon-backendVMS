@@ -6,6 +6,7 @@ import {
   deletePaymentController,
   updatePaymentController,
   searchPaymentController,
+  checkoutBooking,
 } from "./p-controller";
 
 export const paymentRouter = new Hono();
@@ -17,4 +18,7 @@ paymentRouter.delete("/delete-payment/:id", deletePaymentController);
 paymentRouter.put("/update-payment/:id", updatePaymentController);
 paymentRouter.get("/search-payment/:id", searchPaymentController);
 
+paymentRouter.post("/payment-checkout/:booking_id", checkoutBooking);
+
 export default paymentRouter;
+

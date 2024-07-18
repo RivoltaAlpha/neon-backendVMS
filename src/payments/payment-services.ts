@@ -32,6 +32,12 @@ export const updatePayment = async (id: number, data: TIPayment): Promise<TIPaym
   return updatedPayment;
 };
 
+// update payment status 
+export const updatePaymentBySessionId = async (session_id: string)=> {
+   await db.update(payments).set({ payment_status: "Success"}).where(eq(payments.transaction_id, session_id));
+  return "Payment status updated successfully";
+}
+
 // Delete a payment by ID
 export const deletePayment = async (id: number): Promise<string> => {
   await db.delete(payments).where(eq(payments.payment_id, id));

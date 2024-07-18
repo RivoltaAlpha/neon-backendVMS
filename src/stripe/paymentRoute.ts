@@ -6,7 +6,10 @@
 // // ... other routes
 
 // StripePay.post('create-payment-intent', createPaymentIntentController);
+// StripePay.post('payment-checkout', createPaymentIntentController);
 // StripePay.post('confirm-payment', confirmPaymentController);
 // StripePay.post('/webhook', PaymentController.handleWebHook)
 
 // export default StripePay;
+
+

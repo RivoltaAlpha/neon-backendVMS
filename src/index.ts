@@ -21,9 +21,11 @@ import { reportRouter } from './reports/report-router'
 import { ticketRouter } from './tickets/tickets-router'
 import { vehicleRouter } from './vehicle/vehicle-router'
 import { specificationRouter } from './vehicleSpec/vh-routes'
-import { number } from 'zod';
+import handleStripeWebhook from './payments/p-controller';
 
 const app = new Hono();
+
+app.post("/stripe", handleStripeWebhook)
 
 
 const customTimeoutException = () =>

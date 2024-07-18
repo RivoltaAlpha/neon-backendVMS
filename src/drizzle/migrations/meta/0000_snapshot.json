@@ -1,5 +1,5 @@
 {
-  "id": "b96f8339-ca79-448b-a8cd-1fe566621fc9",
+  "id": "4c324f94-54e7-49cc-b8f5-e99268044b1e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -422,6 +422,12 @@
           "primaryKey": false,
           "notNull": true
         },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
         "amount": {
           "name": "amount",
           "type": "numeric(10, 2)",
@@ -480,6 +486,19 @@
           ],
           "columnsTo": [
             "booking_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payments_user_id_users_user_id_fk": {
+          "name": "payments_user_id_users_user_id_fk",
+          "tableFrom": "payments",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -595,6 +614,12 @@
           "notNull": true,
           "default": "'user'"
         },
+        "image_url": {
+          "name": "image_url",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
@@ -693,6 +718,12 @@
           "type": "text[]",
           "primaryKey": false,
           "notNull": true
+        },
+        "image_url": {
+          "name": "image_url",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},

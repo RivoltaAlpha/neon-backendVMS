@@ -3,18 +3,16 @@ POST  http://localhost:8000/auth/register
 Content-Type: application/json
 
 {
-  "first_name": "Andrew",
-  "last_name": "John",
-  "username": "Andrew_john",
-  "password": "securepassword123",
-  "email": "aihugo28@example.com",
-  "contact_phone": "+1-789-000-3456",
-  "address": "227 Maple ",
-  "role": "admin"
+  "first_name": "Tiffany",
+  "last_name": "Nyawira",
+  "username": "Tyla",
+  "password": "password1",
+  "email": "mwanikitiffany@gmail.com",
+  "contact_phone": "+1-789-000-6678",
+  "address": "227 Downtown ",
+  "role": "admin",
+  "image_url": "https://th.bing.com/th?id=OIF.Dr%2f2Lx7%2bPcSggxMsUv06gQ&w=202&h=202&c=7&r=0&o=5&pid=1.7"
 }
-
-
-
 
 
 
@@ -23,8 +21,8 @@ POST  http://localhost:8000/auth/login
 Content-Type: application/json
 
 {
-    "username": "Jay",
-    "password": "securepassword1234"
+    "username": "Tyla",
+    "password": "password1"
 }
 
 ###
@@ -104,20 +102,21 @@ PUT http://localhost:8000/specification/1
 
 ###
 POST http://localhost:8000/specification
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKYXkiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MjEyMjUxMDF9.3LMt-5yiX-Y3aeyn8H2Eum8oRDE3OTCxBLhIOlm-YZM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUeWxhIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzIxMzAwMzgwfQ.bcXqo_eyin7laghZCQMyP1McGhGirgf3wYjgrdE6v4I
 Content-Type: application/json
 
-{
-  "manufacturer": "Kia",
-  "model": "Sportage",
-  "year": 2021,
-  "fuel_type": "Petrol",
-  "engine_capacity": 1800,
-  "transmission": "Automatic",
-  "seating_capacity": 5,
-  "color": "Gray",
-  "features": "Air Conditioning, Bluetooth, Backup Camera"
-}
+  {
+    "manufacturer": "Tesla",
+    "model": "Model S",
+    "year": 2022,
+    "fuel_type": "Electric",
+    "engine_capacity": 0,
+    "transmission": "Automatic",
+    "seating_capacity": 5,
+    "color": "White",
+    "features": "Air Conditioning, Bluetooth, Autopilot",
+    "url_image": "https://www.tesla.com/sites/default/files/modelsx-new/social/model-s-hero-social.jpg"
+  }
 
 
 
@@ -133,12 +132,12 @@ Content-Type: application/json
 
 ###
 POST  http://localhost:8000/vehicle
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKYXkiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MjEyMjUxMDF9.3LMt-5yiX-Y3aeyn8H2Eum8oRDE3OTCxBLhIOlm-YZM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUeWxhIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzIxMzAwMzgwfQ.bcXqo_eyin7laghZCQMyP1McGhGirgf3wYjgrdE6v4I
 Content-Type: application/json
 
 {
-  "vehicleSpec_id": 10,
-  "rental_rate": 7500,
+  "vehicleSpec_id": 4,
+  "rental_rate": 6700,
   "availability": true
 }
 
@@ -186,8 +185,22 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:8000/location/1
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBbmRyZXdfam9obiIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMDcxMzgyNn0.6TI7YJWgc5higOJ2SG0oBwODOfo7-mmHFgqp9uA2-OE
+POST http://localhost:8000/location
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUeWxhIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzIxMzAwMzgwfQ.bcXqo_eyin7laghZCQMyP1McGhGirgf3wYjgrdE6v4I
+Content-Type: application/json
+
+{
+  "name": "Birch Avenue",
+  "address": "678 Birch Avenue",
+  "contact_phone": "+1-901-2345"
+}
+
+
+
+
+
+
+
 
 ###
 GET http://localhost:8000/locations
