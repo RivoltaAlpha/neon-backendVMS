@@ -22,7 +22,8 @@ export const getAllVehicles = async () => {
             transmission: true,
             seating_capacity: true,
             color: true,
-            features: true
+            features: true,
+            image_url: true
           }
         }
       }
