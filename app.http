@@ -3,14 +3,14 @@ POST  http://localhost:8000/auth/register
 Content-Type: application/json
 
 {
-  "first_name": "Tiffany",
-  "last_name": "Nyawira",
-  "username": "Tyla",
-  "password": "password1",
-  "email": "mwanikitiffany@gmail.com",
-  "contact_phone": "+1-789-000-6678",
-  "address": "227 Downtown ",
-  "role": "admin",
+  "first_name": "John",
+  "last_name": "Williams",
+  "username": "johnw",
+  "password": "pass123word",
+  "email": "john.williams@example.com",
+  "contact_phone": "+1-567-890-1234",
+  "address": "890 Pine St, Nowhereville",
+  "role": "user",
   "image_url": "https://th.bing.com/th?id=OIF.Dr%2f2Lx7%2bPcSggxMsUv06gQ&w=202&h=202&c=7&r=0&o=5&pid=1.7"
 }
 
@@ -30,8 +30,8 @@ POST  http://localhost:8000/auth/login
 Content-Type: application/json
 
 {
-    "username": "Tiff",
-    "password": "password"
+    "username": "johnw",
+    "password": "pass123word"
 }
 
 ###
@@ -80,24 +80,48 @@ GET http://localhost:8000/specifications
 
 ###
 POST http://localhost:8000/specification
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKYXkiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MjEyMjUxMDF9.3LMt-5yiX-Y3aeyn8H2Eum8oRDE3OTCxBLhIOlm-YZM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUeWxhIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzIxMzk4MjI3fQ.RmZ9VbSHForBEYyxwkkhFKhqprBongtNB4qSdyJhpHc
+Content-Type: application/json
+
+{
+  "manufacturer": "Kia",
+  "model": "Sorento",
+  "year": 2022,
+  "fuel_type": "Gasoline",
+  "engine_capacity": 25,
+  "transmission": "Automatic",
+  "seating_capacity": 7,
+  "color": "Green",
+  "features": "Air Conditioning, Bluetooth, All-Wheel Drive",
+  "image_url": "https://www.kia.com/us/content/dam/kia/us/en/images/vehicles/2022/sorento/2022-Sorento-Homepage-Masthead-Hero-Desktop.png"
+}
+
+
+
+
 
 
 ###
 GET http://localhost:8000/specification/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUeWxhIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzIxMzk4MjI3fQ.RmZ9VbSHForBEYyxwkkhFKhqprBongtNB4qSdyJhpHc
+
 
 ###
-PUT http://localhost:8000/specification/1
+PUT http://localhost:8000/update-specification/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUeWxhIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzIxMzk4MjI3fQ.RmZ9VbSHForBEYyxwkkhFKhqprBongtNB4qSdyJhpHc
+Content-Type: application/json
+
 {
   "manufacturer": "Toyota",
   "model": "Camry",
   "year": 2020,
   "fuel_type": "Petrol",
-  "engine_capacity": 1800,
+  "engine_capacity": 2500,
   "transmission": "Automatic",
   "seating_capacity": 5,
   "color": "Red",
-  "features": "Air Conditioning, Bluetooth, Backup Camera, Power Steering"
+  "features": "Air Conditioning, Bluetooth, Backup Camera, Power Steering",
+  "image_url": "https://www.toyota.com/imgix/responsive/images/mlp/colorizer/2020/camry/218/1.png"
 }
 
 ###
@@ -105,39 +129,29 @@ POST http://localhost:8000/specification
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUeWxhIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzIxMzAwMzgwfQ.bcXqo_eyin7laghZCQMyP1McGhGirgf3wYjgrdE6v4I
 Content-Type: application/json
 
-  {
-    "manufacturer": "Tesla",
-    "model": "Model S",
-    "year": 2022,
-    "fuel_type": "Electric",
-    "engine_capacity": 0,
-    "transmission": "Automatic",
-    "seating_capacity": 5,
-    "color": "White",
-    "features": "Air Conditioning, Bluetooth, Autopilot",
-    "url_image": "https://www.tesla.com/sites/default/files/modelsx-new/social/model-s-hero-social.jpg"
-  }
+###
+POST http://localhost:8000/ticket
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2hudyIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzIxMzk5MjQ4fQ.sWnTluWwRSUd8iepmFvxTaRlIQsghf7qnUjjv8muk1s
+Content-Type: application/json
 
-
-
-
-
-
-
-
-
+{
+  "user_id": 1,
+  "subject": "Reservation Issue",
+  "description": "My reservation was not confirmed.",
+  "ticket_status": "In Progress"
+}
 
 
 
 
 ###
 POST  http://localhost:8000/vehicle
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUeWxhIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzIxMzAwMzgwfQ.bcXqo_eyin7laghZCQMyP1McGhGirgf3wYjgrdE6v4I
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUeWxhIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzIxMzk4MjI3fQ.RmZ9VbSHForBEYyxwkkhFKhqprBongtNB4qSdyJhpHc
 Content-Type: application/json
 
 {
-  "vehicleSpec_id": 4,
-  "rental_rate": 6700,
+  "vehicleSpec_id": 12,
+  "rental_rate": 7000,
   "availability": true
 }
 
@@ -166,13 +180,14 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBbmRyZXdfam9obiIs
 
 ###
 POST http://localhost:8000/location
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKYXkiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MjEyMjUxMDF9.3LMt-5yiX-Y3aeyn8H2Eum8oRDE3OTCxBLhIOlm-YZM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUeWxhIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzIxMzk4MjI3fQ.RmZ9VbSHForBEYyxwkkhFKhqprBongtNB4qSdyJhpHc
 Content-Type: application/json
 
 {
-  "name": "Spruce Street",
-  "address": "456 Spruce Street",
-  "contact_phone": "+1-567-8901"
+  "name": "Business Bay",
+  "address": "7077 Business Blvd",
+  "city": "Dallas",
+  "contact_phone": "555-444-3333"
 }
 
 
