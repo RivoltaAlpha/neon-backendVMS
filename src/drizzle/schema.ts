@@ -61,7 +61,7 @@ export const vehicleSpecifications = pgTable('vehicle_specifications', {
     seating_capacity: integer('seating_capacity').notNull(),
     color: text('color').notNull(),
     features: text('features').array().notNull(),
-    image_url: varchar('image_url' , { length: 100 }),
+    image_url: text('image_url'),
 });
 // relationship
 
@@ -176,6 +176,7 @@ export const locations = pgTable('locations', {
     location_id: serial('location_id').primaryKey(),
     name: varchar('name', { length: 100 }).notNull(),
     address: varchar('address', { length: 100 }).notNull(),
+    city: varchar('city', {length: 50}).notNull(),
     contact_phone: varchar('contact_phone', { length: 100 }).notNull(),
     created_at: timestamp('created_at').defaultNow().notNull(),
     updated_at: timestamp('updated_at').defaultNow().notNull(),
