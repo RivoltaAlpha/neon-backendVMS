@@ -6,6 +6,7 @@ import {
     updateTicket,
     searchTicket,
     ticketExists,
+    getUserTickets,
   } from "./ticket-services";
   
   import {
@@ -15,6 +16,7 @@ import {
     deleteController,
     updateController,
     searchController,
+    
   } from "../generics/gen-controller";
   
   // Specific controllers for ticket operations
@@ -24,4 +26,8 @@ import {
   export const deleteTicketController = deleteController(ticketExists, deleteTicket);
   export const updateTicketController = updateController(ticketExists, updateTicket);
   export const searchTicketController = searchController(searchTicket);
+
+
+  // get user tickets controller
+  export const getUserTicketsController = getSpecificsController(getUserTickets);
   

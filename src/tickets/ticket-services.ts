@@ -52,7 +52,9 @@ export const createTicket = async (data: TITicket): Promise<TITicket> => {
 // Update a ticket's information
 export const updateTicket = async (id: number, data: TITicket): Promise<TITicket | undefined> => {
   const { ticket_id, ...rest } = data;
-  const [updatedTicket] = await db.update(customerSupportTickets).set({ ticket_id, ...rest }).where(eq(customerSupportTickets.ticket_id, id)).returning();
+  console.log("Raw data received:", data);
+  const [updatedTicket] = await db.update(customerSupportTickets).set({ ticket_id, updated_at: new Date(), ...rest }).where(eq(customerSupportTickets.ticket_id, id)).returning();
+  console.log("Ticket updated successfully", updatedTicket);
   return updatedTicket;
 };
 

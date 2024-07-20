@@ -6,6 +6,7 @@ import {
   deleteTicketController,
   updateTicketController,
   searchTicketController,
+  getUserTicketsController
 } from "./ticket-controller";
 
 export const ticketRouter = new Hono();
@@ -18,5 +19,6 @@ ticketRouter.post("/ticket",authenticateUser, createTicketController);
 ticketRouter.delete("/delete-ticket/:id",authenticateUser, deleteTicketController);
 ticketRouter.put("/update-ticket/:id",authenticateAdmin, updateTicketController);
 ticketRouter.get("/search-ticket/:id",authenticateUser, searchTicketController);
+ticketRouter.get("/user-tickets/:id",authenticateUser, getUserTicketsController);
 
 export default ticketRouter;
