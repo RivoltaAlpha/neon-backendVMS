@@ -7,6 +7,7 @@ import {
   updatePaymentController,
   searchPaymentController,
   checkoutBooking,
+  getUserPaymentController,
   fetchUserPayments,
 } from "./p-controller";
 
@@ -19,6 +20,7 @@ paymentRouter.delete("/delete-payment/:id", deletePaymentController);
 paymentRouter.put("/update-payment/:id", updatePaymentController);
 paymentRouter.get("/search-payment/:id", searchPaymentController);
 paymentRouter.get("/user-payments", fetchUserPayments);
+paymentRouter.get("/userPayments/:id", getUserPaymentController);
 paymentRouter.post("/payment-checkout/:booking_id", checkoutBooking);
 
 export default paymentRouter;

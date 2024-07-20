@@ -1,22 +1,5 @@
-import {
-    getAllPayments,
-    getPaymentById,
-    createPayment,
-    deletePayment,
-    updatePayment,
-    searchPayment,
-    paymentExists,
-    updatePaymentBySessionId,
-    updateBookingStatus,
-    getPaymentsByUserId,
-  } from "./payment-services";
-  
-  import {
-    getAllController,
-    getSpecificsController,
-    deleteController,
-    searchController,
-  } from "../generics/gen-controller";
+import { getAllPayments, getPaymentById, createPayment, deletePayment, updatePayment, searchPayment, paymentExists, updatePaymentBySessionId, updateBookingStatus, getPaymentsByUserId, updateVehicleAvailabilityByBookingId,} from "./payment-services";
+import { getAllController, getSpecificsController, deleteController, searchController, updateController } from "../generics/gen-controller";
 
 import {    updateControllerWithDates, createControllerWithDates } from '../generics/timeGen';
 import { Context } from "hono";
@@ -28,16 +11,15 @@ dotenv.config();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {  apiVersion: '2024-06-20', });
 
-
   // Specific controllers for payment operations
   export const getAllPaymentsController = getAllController(getAllPayments);
   export const getPaymentController = getSpecificsController(getPaymentById);
+  export const getUserPaymentController = getSpecificsController(getPaymentsByUserId);
   export const createPaymentController = createControllerWithDates(createPayment,['payment_date']);
   export const updatePaymentController = updateControllerWithDates(paymentExists,updatePayment,['payment_date']);
   export const deletePaymentController = deleteController(paymentExists, deletePayment);
   export const searchPaymentController = searchController(searchPayment);
   
-
 
   export const checkoutBooking = async (c: Context) => {
     let booking;
@@ -67,14 +49,14 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {  apiVersion: '2024-06
             payment_method_types: ['card'],
             line_items,
             mode: 'payment',
-            success_url: `${FRONTEND_URL}/user-bookings/${booking.user_id}`,
+            // success_url: `${FRONTEND_URL}/user-bookings/${booking.user_id}`,
+            success_url: `${FRONTEND_URL}/thankyou`,
             cancel_url: `${FRONTEND_URL}/explore`,
             metadata: {
                 booking_id: booking.booking_id.toString(),
             },
-          
         };
-        console.log(sessionParams)
+
         const session: Stripe.Checkout.Session = await stripe.checkout.sessions.create(sessionParams);
         // Save payment details to the database
         const paymentDetails = {
@@ -93,6 +75,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {  apiVersion: '2024-06
         return c.text(error?.message, 400);
     }
 };
+
+// export const updateBookingStatus = async (booking_id: number) => {
+//     await db.update(bookings).set({ booking_status: "Confirmed" }).where(eq(bookings.booking_id, booking_id));
+//     return "Booking status updated successfully";
+// }
 
 
 
@@ -119,13 +106,11 @@ export const handleStripeWebhook = async (c: Context) => {
           try {
               const session_id = session.id;
               const updatePaymentStatus = await updatePaymentBySessionId(session_id);
-              // const booking_id = session.booking_id;
-              // const booking_status = await updateBookingStatus( booking_id, 'Confirmed');
+
               return c.json({ payment: updatePaymentStatus }, 200);
           } catch (err: any) {
               return c.text(`Database Error: ${err.message}`, 500);
           }
-
       // Handle other event types as needed
       default:
           return c.text(`Unhandled event type ${event.type}`, 400);
@@ -136,7 +121,7 @@ export const handleStripeWebhook = async (c: Context) => {
 export const fetchUserPayments = async (c: Context) => {
   try {
     const user_id = parseInt(c.req.param('user_id'), 10);
-    if (isNaN(user_id)) {
+    if (isNaN (user_id)) {
       return c.text('Invalid user ID', 400);
     }
 
@@ -148,3 +133,6 @@ export const fetchUserPayments = async (c: Context) => {
 };
 
 export default handleStripeWebhook;
+
+
+// getPaymentsByUserId
