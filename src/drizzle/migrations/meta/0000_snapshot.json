@@ -1,5 +1,5 @@
 {
-  "id": "4c324f94-54e7-49cc-b8f5-e99268044b1e",
+  "id": "ab0e81aa-294f-4e1c-94f6-3764509bd22b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -380,6 +380,12 @@
           "primaryKey": false,
           "notNull": true
         },
+        "city": {
+          "name": "city",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
         "contact_phone": {
           "name": "contact_phone",
           "type": "varchar(100)",
@@ -721,7 +727,7 @@
         },
         "image_url": {
           "name": "image_url",
-          "type": "varchar(100)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         }

@@ -264,15 +264,15 @@ GET http://localhost:8000/tickets
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUaWZmIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MjA3MTU4MDl9.8fYGwh6phmZnlz8rRa5UvgDP2pdKmjLoGlKpIofhQ7k
 
 ###
-POST http://localhost:8000/ticket
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUaWZmIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MjA3MTU4MDl9.8fYGwh6phmZnlz8rRa5UvgDP2pdKmjLoGlKpIofhQ7k
+PUT http://localhost:8000/update-ticket/5
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUeWxhIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzIxNDMzMDczfQ.IZnf3c_X43kyPvl7oYhGQd3bY47PkXMqtTCWoSmFl_k
 Content-Type: application/json
 
 {
-  "user_id":6,
-  "subject": "Damages",
-  "description":" Damaged Vehicle",
-  "ticket_status": "Open"
+  "user_id":1,
+  "subject": "Vehicle Damage",
+  "description": "The car I rented has a dent on the door.",
+  "ticket_status": "Closed"
 }
 
 ###

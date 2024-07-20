@@ -124,6 +124,10 @@ export const paymentRelationships = relations(payments, ({ one }) => ({
         fields: [payments.booking_id],
         references: [bookings.booking_id],
     }),
+    user: one(users, {
+        fields: [payments.user_id],
+        references: [users.user_id],
+    })
 }));
 
 // Authentication table
