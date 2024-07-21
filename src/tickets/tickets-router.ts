@@ -18,7 +18,7 @@ ticketRouter.get("/ticket/:id",authenticateBoth, getTicketController);
 ticketRouter.post("/ticket",authenticateUser, createTicketController);
 ticketRouter.delete("/delete-ticket/:id",authenticateUser, deleteTicketController);
 ticketRouter.put("/update-ticket/:id",authenticateAdmin, updateTicketController);
-ticketRouter.get("/search-ticket/:id",authenticateUser, searchTicketController);
-ticketRouter.get("/user-tickets/:id",authenticateUser, getUserTicketsController);
+ticketRouter.get("/search-ticket/:id",authenticateBoth, searchTicketController);
+ticketRouter.get("/user-tickets/:id",authenticateBoth, getUserTicketsController);
 
 export default ticketRouter;

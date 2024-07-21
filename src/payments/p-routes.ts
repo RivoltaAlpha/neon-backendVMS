@@ -11,16 +11,19 @@ import {
   fetchUserPayments,
 } from "./p-controller";
 
+import { authenticateAdmin, authenticateBoth } from "../middleware/auth";
+
+
 export const paymentRouter = new Hono();
 
-paymentRouter.get("/payments", getAllPaymentsController);
-paymentRouter.get("/payment/:id", getPaymentController);
-paymentRouter.post("/payment", createPaymentController);
-paymentRouter.delete("/delete-payment/:id", deletePaymentController);
-paymentRouter.put("/update-payment/:id", updatePaymentController);
-paymentRouter.get("/search-payment/:id", searchPaymentController);
-paymentRouter.get("/user-payments", fetchUserPayments);
-paymentRouter.get("/userPayments/:id", getUserPaymentController);
+paymentRouter.get("/payments",authenticateAdmin, getAllPaymentsController);
+paymentRouter.get("/payment/:id", authenticateBoth, getPaymentController);
+paymentRouter.post("/payment", authenticateBoth, createPaymentController);
+paymentRouter.delete("/delete-payment/:id", authenticateBoth, deletePaymentController);
+paymentRouter.put("/update-payment/:id",authenticateBoth, updatePaymentController);
+paymentRouter.get("/search-payment/:id",authenticateBoth, searchPaymentController);
+paymentRouter.get("/user-payments",authenticateBoth, fetchUserPayments);
+paymentRouter.get("/userPayments/:id",authenticateBoth, getUserPaymentController);
 paymentRouter.post("/payment-checkout/:booking_id", checkoutBooking);
 
 export default paymentRouter;

@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { authenticateAdmin, authenticateBoth } from "../middleware/auth";
+import { authenticateUser, authenticateBoth } from "../middleware/auth";
 import {
   getAllUsersController,
   getUserController,
@@ -19,7 +19,7 @@ userRouter.post("user",authenticateBoth, createUserController);
 
 userRouter.delete("delete-user/:id", authenticateBoth,  deleteUserController);
 
-userRouter.put("update-user/:id", authenticateBoth,updateUserController);
+userRouter.put("update-user/:id", authenticateUser,updateUserController);
 
 userRouter.get("/search-user/:id", authenticateBoth, searchUserController);
 

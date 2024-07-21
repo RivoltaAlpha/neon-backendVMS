@@ -11,7 +11,7 @@ import { authenticateAdmin, authenticateBoth } from "../middleware/auth";
 
 export const vehicleRouter = new Hono();
 
-vehicleRouter.get("vehicles", authenticateBoth , getAllVehiclesController);
+vehicleRouter.get("vehicles",  getAllVehiclesController);
 vehicleRouter.get("/vehicle/:id", authenticateBoth, getVehicleController);
 vehicleRouter.post("/vehicle", authenticateAdmin, createVehicleController);
 vehicleRouter.delete("/delete-vehicle/:id", authenticateAdmin, deleteVehicleController);

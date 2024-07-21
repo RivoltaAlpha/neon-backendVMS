@@ -8,6 +8,9 @@ import {
   searchFleetRecordController,
 } from "./fm-controller";
 
+import { authenticateAdmin, authenticateBoth } from "../middleware/auth";
+
+
 export const fleetManagementRouter = new Hono();
 
 fleetManagementRouter.get("/fleet-records", getAllFleetRecordsController);

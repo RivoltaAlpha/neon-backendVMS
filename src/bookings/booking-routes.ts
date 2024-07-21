@@ -14,7 +14,7 @@ import {
 
 export const bookingRouter = new Hono();
 
-bookingRouter.get("/bookings", authenticateBoth, getAllBookingsController);
+bookingRouter.get("/bookings", authenticateAdmin, getAllBookingsController);
 bookingRouter.get("/booking/:id", authenticateBoth, getBookingController);
 bookingRouter.post("/create-booking", authenticateBoth, createBookingController);
 bookingRouter.delete("/delete-booking/:id", authenticateBoth, deleteBookingController);
