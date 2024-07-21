@@ -3,8 +3,46 @@ import { eq } from "drizzle-orm";
 import db from "../drizzle/db";
 
 // Retrieve all fleet records
-export const getAllFleetRecords = async (): Promise<TSManagement[]> => {
-  return await db.query.fleetManagement.findMany();
+export const getAllFleetRecords = async () => {
+  const fleetRecords = await db.query.fleetManagement.findMany({
+    where: (fields, { eq }) => eq(fields.fleet_id, fields.fleet_id),
+    columns: {
+      fleet_id: true,
+      fleet_name: true,
+      vehicle_id: true,
+      acquisition_date: true,
+      depreciation_rate: true,
+      current_value: true,
+      maintenance_cost: true,
+      fleetManagement_status: true,
+      created_at: true,
+      updated_at: true,
+    },
+    with: {
+      vehicle: {
+        columns: {
+          vehicle_id: true,
+          availability: true,
+          rental_rate: true,
+        },with: {
+          vehicleSpec: {
+            columns: {
+              manufacturer: true,
+              model: true,
+              year: true,
+              fuel_type: true,
+              engine_capacity: true,
+              transmission: true,
+              seating_capacity: true,
+              color: true,
+              features: true,
+              image_url: true
+            }
+          }
+        }
+    }
+  }});
+  return fleetRecords;
 };
 
 // Retrieve a fleet record by ID
