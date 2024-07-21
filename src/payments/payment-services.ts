@@ -78,16 +78,69 @@ export const updatePayment = async (id: number, data: TIPayment): Promise<TIPaym
 
 // update payment status 
 export const updatePaymentBySessionId = async (session_id: string)=> {
-  await db.update(payments).set({ payment_status: "Success"}).where(eq(payments.transaction_id, session_id));
-  // await db.update(bookings).set({ booking_status: "Confirmed"}).where(eq(bookings.booking_id, booking_id));
+ const result = await db.update(payments).set({ payment_status: "Success"}).where(eq(payments.transaction_id, session_id)).returning();
+
+ console.log('updatePaymentBySessionId result:', result);
+  
+ if (result.length === 0) {
+   throw new Error(`No payment found with session_id: ${session_id}`);
+ }
+
   return "Payment status updated successfully";
 }
 
 // update bookingStatus based on payment status
 export const updateBookingStatus = async (booking_id: number) => {
-  await db.update(bookings).set({ booking_status: "Confirmed" }).where(eq(bookings.booking_id, booking_id));
-  return "Booking status updated successfully";
+  const result = await db.update(bookings).set({ booking_status: "Confirmed" }).where(eq(bookings.booking_id, booking_id)).returning();
+
+  console.log('updateBookingStatus result:', result);
+  
+  if (result.length === 0) {
+    throw new Error(`No booking found with booking_id: ${booking_id}`);
+  }
+  
+  return result[0];
+
 }
+
+
+export const updateVehicleAvailabilityByBookingId = async (booking_id: number) => {
+  const [booking] = await db.select({ vehicle_id: bookings.vehicle_id })
+    .from(bookings)
+    .where(eq(bookings.booking_id, booking_id));
+
+  console.log('Found booking:', booking);
+
+  if (!booking) {
+    throw new Error(`Booking not found with booking_id: ${booking_id}`);
+  }
+
+  const vehicleId = booking.vehicle_id;
+
+  const result = await db.update(vehicles).set({ availability: false }).where(eq(vehicles.vehicle_id, vehicleId)).returning();
+
+  console.log('updateVehicleAvailabilityByBookingId result:', result);
+
+  if (result.length === 0) {
+    throw new Error(`No vehicle found with vehicle_id: ${vehicleId}`);
+  }
+
+  return "Vehicle availability updated successfully";
+}
+
+
+// // updateVehicleAvailabilityByBookingId
+// export const updateVehicleAvailabilityByBookingId = async (booking_id: number) => {
+//   const [vehicle] = await db.select({vehicle_id: bookings.vehicle_id}).from(bookings).where(eq(bookings.booking_id, booking_id));
+//   if (!vehicle) {
+//     throw new Error("Booking not found");
+//   }
+
+//   const vehicleId = vehicle.vehicle_id;
+
+//   await db.update(vehicles).set({ availability: false }).where(eq(vehicles.vehicle_id, vehicleId));
+//   return "Vehicle availability updated successfully";
+// }
 
 // Delete a payment by ID
 export const deletePayment = async (id: number): Promise<string> => {
@@ -154,14 +207,9 @@ export const getPaymentsByUserId = async (user_id: number) => {
       }
     }
   });
-  console.log("payments: ", payments)
   return payments;
 };
 
 
-// updateVehicleAvailabilityByBookingId
-export const updateVehicleAvailabilityByBookingId = async (booking_id: number) => {
-  await db.update(vehicles).set({ availability: false }).where(eq(bookings.booking_id, booking_id));
-  return "Vehicle availability updated successfully";
-}
+
 
