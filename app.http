@@ -294,3 +294,17 @@ Content-Type: application/json
   "payment_method":"card",
   "transaction_id": 1
 }
+###
+POST http://localhost:8000/fleet-record
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUeWxhIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzIxNTY3NjA0fQ.3PMV6gcG_MJaIwzbH_Dvo7vU8xXv4z5ZJ6t47tn8I2c
+Content-Type: application/json
+
+  {
+    "fleet_name": "Fleet Luxury",
+    "vehicle_id": 10,
+    "acquisition_date": "2022-01-25T00:00:00Z",
+    "depreciation_rate": 4.50,
+    "current_value": 50000.00,
+    "maintenance_cost": 8000.00,
+    "fleetManagement_status": "Inactive"
+  }
