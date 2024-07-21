@@ -16,7 +16,7 @@ import { authenticateAdmin, authenticateBoth } from "../middleware/auth";
 
 export const paymentRouter = new Hono();
 
-paymentRouter.get("/payments",authenticateAdmin, getAllPaymentsController);
+paymentRouter.get("/payments",authenticateBoth, getAllPaymentsController);
 paymentRouter.get("/payment/:id", authenticateBoth, getPaymentController);
 paymentRouter.post("/payment", authenticateBoth, createPaymentController);
 paymentRouter.delete("/delete-payment/:id", authenticateBoth, deletePaymentController);
