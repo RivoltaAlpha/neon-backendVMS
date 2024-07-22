@@ -46,3 +46,4 @@ export async function addReport(reportData: TReport): Promise<TReport> {
   const [newReport] = await db.insert(reports).values(reportData).returning();
   return newReport;
 }
+
