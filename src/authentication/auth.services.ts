@@ -22,7 +22,8 @@ export const loginAuthService = async (user: TSAuthentication) => {
             username: true,
             contact_phone: true,
             address: true,
-            email: true
+            email: true,
+            image_url: true,
           }
         }
       }
