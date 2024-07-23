@@ -50,7 +50,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {  apiVersion: '2024-06
             payment_method_types: ['card'],
             line_items,
             mode: 'payment',
-            success_url: `${FRONTEND_URL}/thankyou`,
+            success_url: `${FRONTEND_URL}/users/thankyou`,
             cancel_url: `${FRONTEND_URL}/explore`,
             metadata: {
                 booking_id: booking.booking_id.toString(),
