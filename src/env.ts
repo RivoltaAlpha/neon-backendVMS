@@ -13,4 +13,4 @@ const env = envSchema.parse(process.env);
 export { env };
 
 
-export const FRONTEND_URL = 'http://localhost:5173'
+export const FRONTEND_URL = 'https://ashy-mud-06186b40f.5.azurestaticapps.net'
