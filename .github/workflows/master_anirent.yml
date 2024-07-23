@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: 'anirent'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_60216A65CE8D46BE8BDE07F3822320EE }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_70A3CBF41BA44EEB88B590AD23609FF5 }}
           package: .
